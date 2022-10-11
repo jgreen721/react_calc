@@ -1,38 +1,245 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --darksatblue: hsl(222, 26%, 31%);
+  --darksatblue2: hsl(223, 31%, 20%);
+  --darksatblue3: hsl(224, 36%, 15%);
+  --darkkeybg: hsl(225, 21%, 49%);
+  --darkkeyshadow: hsl(224, 28%, 35%);
+  --red: hsl(6, 63%, 50%);
+  --darkred: hsl(6, 70%, 34%);
+  --lightgrayorange: hsl(30, 25%, 89%);
+  --grayorange: hsl(28, 16%, 65%);
+  --darkgraytext: hsl(221, 14%, 31%);
+  --primcolor: white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app {
+  font-family: "League Spartan", sans-serif;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 100vh;
+  width: 100vw;
+  /* background: var(--darksatblue); */
+}
+
+.app[data-theme="primary"] {
+  background: var(--darksatblue);
+  --mainkey: white;
+  --secondarybg: var(--darksatblue);
+  --screenbg: var(--darksatblue3);
+  --screencolor: white;
+  --color: var(--maincolor);
+  --secondarycolor: white;
+  --maincalc: var(--darksatblue3);
+  --red: hsl(6, 63%, 50%);
+}
+
+.app[data-theme="secondary"] {
+  background: hsl(30, 25%, 89%);
+  --mainkey: hsl(180, 2%, 68%);
+  --secondarybg: hsl(185, 59%, 49%);
+  --screenbg: white;
+  --screencolor: black;
+  --color: black;
+  --secondarycolor: white;
+  --maincalc: lightgray;
+  --red: hsl(27, 92%, 47%);
+}
+
+.app[data-theme="tertiary"] {
+  background: rgb(30, 5, 37);
+  --mainkey: rgb(69, 9, 104);
+  --secondarybg: rgb(155, 27, 230);
+  --screenbg: rgb(155, 27, 230);
+  --screencolor: yellow;
+  --color: yellow;
+  --secondarycolor: yellow;
+  --maincalc: rgb(95, 25, 95);
+
+  --red: rgb(71, 233, 233);
+}
+
+li {
+  list-style: none;
+}
+
+.calc-parent {
+  width: clamp(40%, 400px, 85%);
+  /* border: 2px solid black; */
+  height: 75%;
+  /* max-height: 600px; */
+  max-width: 500px;
+  padding: 0.5em;
+  color: var(--color);
+  /* min-height: 600px; */
+  height: 600px;
+}
+
+.grid-parent {
+  width: 95%;
+  height: 95%;
+  /* border: 2px solid red; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+}
+
+.calc-btn {
+  /* height: 100%;
+  width: 100%; */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  width: 100%;
+  height: 80%;
+  transform: translateY(10%);
+  /* border: 3px solid red; */
+  position: relative;
+  overflow: hidden;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.primary {
+  background: var(--mainkey);
+
+  color: var(--color);
+}
+
+.calc-btn:after {
+  width: 125%;
+  height: 2px;
+  background: black;
+  content: "";
+  position: absolute;
+  transition: 0.2s ease;
+  opacity: 25%;
+  bottom: 0;
+}
+
+/* .calc-btn:hover::after {
+  width: 125%;
+  height: 3px;
+  background: black;
+  content: "";
+  position: absolute;
+  opacity: 65%;
+
+  bottom: 0;
+} */
+
+.calc-btn:hover {
+  box-shadow: 2px 2px 17px gray;
+}
+
+.flex-row {
+  display: flex;
+  width: 100%;
+  /* border: 2px solid red; */
+}
+
+.flex-btn {
+  flex: 1;
+  padding: 1em;
+  margin: 0.5em;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-transform: uppercase;
   color: white;
+  cursor: pointer;
+  border: none;
 }
 
-.App-link {
-  color: #61dafb;
+.flex-btn:hover {
+  transform: scale(1.02);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.red {
+  background: var(--red);
 }
+
+.secondary {
+  background: var(--secondarybg);
+  color: var(--secondarycolor);
+}
+
+/* body[data-theme="theme1"] {
+} */
+
+/* Very dark desaturated blue (main background): hsl(222, 26%, 31%)
+- Very dark desaturated blue (toggle background, keypad background): hsl(223, 31%, 20%)
+- Very dark desaturated blue (screen background): hsl(224, 36%, 15%)
+
+#### Keys
+
+- Desaturated dark blue (key background): hsl(225, 21%, 49%)
+- Desaturated dark blue (key shadow): hsl(224, 28%, 35%)
+
+- Red (key background, toggle): hsl(6, 63%, 50%)
+- Dark red (key shadow): hsl(6, 70%, 34%)
+
+- Light grayish orange (key background): hsl(30, 25%, 89%)
+- Grayish orange (key shadow): hsl(28, 16%, 65%)
+
+#### Text
+
+- Very dark grayish blue: hsl(221, 14%, 31%)
+- White: hsl(0, 0, 100%) */
+/* 
+### Theme 2
+
+#### Backgrounds
+
+- Light gray (main background): hsl(0, 0%, 90%)
+- Grayish red (toggle background, keypad background): hsl(0, 5%, 81%)
+- Very light gray (screen background): hsl(0, 0%, 93%)
+
+#### Keys
+
+- Dark moderate cyan (key background): hsl(185, 42%, 37%)
+- Very dark cyan (key shadow): hsl(185, 58%, 25%)
+
+- Orange (key background, toggle): hsl(25, 98%, 40%)
+- Dark orange (key shadow): hsl(25, 99%, 27%)
+
+- Light grayish yellow (key background): hsl(45, 7%, 89%)
+- Dark grayish orange (key shadow): hsl(35, 11%, 61%)
+
+#### Text
+
+- Very dark grayish yellow: hsl(60, 10%, 19%)
+- White (text): hsl(0, 0, 100%)
+
+### Theme 3
+
+#### Backgrounds
+
+- Very dark violet (main background): hsl(268, 75%, 9%)
+- Very dark violet (toggle background, keypad background, screen background): hsl(268, 71%, 12%)
+
+#### Keys
+
+- Dark violet (key background): hsl(281, 89%, 26%)
+- Vivid magenta (key shadow): hsl(285, 91%, 52%)
+
+- Pure cyan (key background, toggle): hsl(176, 100%, 44%)
+- Soft cyan (key shadow): hsl(177, 92%, 70%)
+
+- Very dark violet (key background): hsl(268, 47%, 21%)
+- Dark magenta (key shadow): hsl(290, 70%, 36%)
+
+#### Text
+
+- Light yellow: hsl(52, 100%, 62%)
+- Very dark blue: hsl(198, 20%, 13%)
+- White (text): hsl(0, 0, 100%) */
